@@ -1,0 +1,97 @@
+<div class="page-wrapper">
+  <ng-container *ngIf="!fetchDone">
+    <div class="loading-indicator-wrapper">
+      <mat-spinner [diameter]="40"></mat-spinner>
+    </div>
+  </ng-container>
+  <app-data-not-found *ngIf="fetchDone && noResponse && errorMsg">
+      <div class="no-data-found">
+        <p>
+          {{errorMsg}}
+        </p>
+        <p class="navigate-desc">
+          <span class="error-navigate" (click)="homePage()">Click Here</span> to navigate to home page.
+        </p>
+      </div>
+  </app-data-not-found>
+  <div class="emp-data-container" *ngIf="fetchDone && noResponse && !errorMsg">
+    <div class="emp-head-container">
+      <div>Name: <span class="emp-head-content">{{empName}}</span></div>
+    </div>
+    <div class="emp-head-container">
+      <div>Month: <span class="emp-head-content">{{salaryMonth | titlecase}}</span></div>
+    </div>
+    <div class="emp-head-container">
+      <div>Year: <span class="emp-head-content">{{selectedYear}}</span></div>
+    </div>
+  </div>
+  <app-data-not-found *ngIf="fetchDone && noResponse && !errorMsg">
+      <div class="no-data-found">
+        <p>
+          No salary record found for this month.
+        </p>
+        <p>
+          <a class="error-navigate" routerLink="/employee/{{empId}}/salarySlips">click here</a> to search for other month's record!
+        </p>
+      </div>
+  </app-data-not-found>
+  <app-page-header *ngIf="fetchDone && !noResponse && !errorMsg"
+    [backBtn]="backBtn" (backBtnClickEvent)="previousPage()"
+    [printBtnObj]="printBtnObj" (printBtnClickEvent)="printPage()"
+    [sendMailBtnObj]="sendMailBtnObj" (sendBtnClickEvent)="sendMail()">
+  </app-page-header>
+  <div *ngIf="fetchDone && !noResponse  && !errorMsg">
+    <div class="salary-slip-wrapper">
+      <div class="salary-head-container">
+        <div class="company-details">
+            <div class="company-name">{{companyDetails?.companyName}}</div>
+            <div class="company-address">{{companyDetails?.companyAdd}}</div>
+            <div class="company-address">CIN {{companyDetails?.cinNumber}}</div>
+            <div class="company-address">
+              Salary slip for the month of {{responseMonth}} {{responseData?.year}}
+            </div>
+        </div>
+        <div class="days-month">
+            No of days {{currentMonthDays}}
+        </div>
+      </div>
+      <div class="row salary-content">
+        <ng-container *ngFor="let item of salaryDisplayItems">
+          <div class="col-3 salary-items" [class.bold-text]="item.isHeading">{{item?.itemLabel}}</div>
+          <div class="col-3 salary-items" *ngIf="!item.isNotApplicable; else other_content" [class.bold-text]="item.isHeading">{{item?.itemValue | inrCurrency: item.isAmount}}</div>
+          <ng-template #other_content>
+            <div class="col-3 salary-items" [class.bold-text]="item.isHeading">Not Applicable</div>
+          </ng-template>
+        </ng-container>
+        <div class="col-3 authority-seal">
+            <img class="seal-img" [src]="companySealImg">
+        </div>
+        <div class="col-9 sign-sections">
+          <div class="sign">
+            <img class="sign-img" [src]="directorSignImg">
+          </div>
+          <div class="sign-content">
+            Authorised Signatory
+          </div>
+        </div>
+        <div id="watermark">
+          CONFIDENTIAL
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{modalResponse}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Email will be sent to {{modalContent}}, shortly!</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn print-btn" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+</div>

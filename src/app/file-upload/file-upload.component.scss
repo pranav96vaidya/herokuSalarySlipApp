@@ -1,0 +1,152 @@
+@import '../../assets/scss/variables';
+
+.upload-head {
+  color: $blackColor;
+  font-size: 25px;
+  font-weight: $lightBold;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.upload-file-container {
+  background-image: url("../../assets/upload.png");
+  background-repeat: no-repeat;
+  background-size: 60px;
+  background-position: 50% 75%;
+  border: 2px dashed $fileUploadBorderColor;
+  border-radius: 10px;
+  color: $blackColor;
+  height: 220px;
+  margin: 0 auto;
+  width: 60%;
+
+  .upload-desc {
+    font-size: 16px;
+    text-align: center; 
+    padding-top: 10px;
+    @media (max-width: $smWidth) {
+      font-size: 14px;
+    }
+  }
+
+  .file-uploaded {
+    color: $btnColor;
+    font-size: 18px;
+    font-weight: $lightBold;
+    text-align: center; 
+    padding-top: 20px;
+    @media (max-width: $smWidth) {
+      font-size: 14px;
+    }
+  }
+}
+
+.upload-input,
+.upload-input-out {
+  background-color: $whiteColor;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.upload-input-hover,
+.upload-input-drag-over {
+  background-color: #9ecbec;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.upload-input-drag-leave,
+.upload-input-drop {
+  background-color: #f5fcff;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.file-name {
+  background: $whiteColor;
+  border: 1px dashed;
+  border-radius: 12px;
+  color: $fileListColor;
+  margin: 10px auto;
+  padding: 5px;
+}
+
+.upload-btn-container {
+  margin: 10px auto;
+  padding: 5px;
+
+  .upload-btn-data {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .btn-primary {
+    background-color: $btnColor;
+    @media (max-width: $smWidth) {
+      font-size: 10px;
+    }
+
+    &:hover {
+      background-color: $btnColor;
+    }
+  
+    &:focus {
+      outline: none ;
+      box-shadow: none ;
+    }
+  }
+}
+
+.upload-btn {
+  background-color: $btnColor;
+  padding: 2px 10px;
+}
+
+.reload-link {
+  color: $blackColor;
+  text-decoration: underline;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.select-file-help {
+  color: $blackColor;
+  font-size: 13px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.select-file-error {
+  font-size: 16px;
+}
+
+.head-container {
+  padding: 20px 0;
+  
+  .send-btn-container,
+  .back-btn-container {
+    text-align: right;
+    @media (max-width: $smWidth) {
+      text-align: left;
+    }
+  }
+}
+
+.error-head-container {
+  text-align: center;
+}
+
+.error-head {
+  font-size: 18px;
+  margin: 0 auto;
+  margin-bottom: 25px;
+  width: 90%;
+
+  .invalid-email-text {
+    color: $blackColor;
+    font-size: 14px;
+    margin: 15px 15px 15px 0;
+  }
+}

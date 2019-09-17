@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-md fixed-top navbar-light">
+  <a class="navbar-brand">
+    <img class="brand-img" src="https://www.newput.com/wp/wp-content/uploads/2016/01/newput-logo.png" alt="logo" (click)="loadHomePage()">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div id="navbarNavDropdown" class="navbar-collapse collapse" *ngIf="empResponse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link redirect-content" href="http://newput.timetracker.s3-website-us-west-1.amazonaws.com/" target="_blank" aria-haspopup="true" aria-expanded="false">TimeSheet</a>
+        </li>
+        <li class="nav-item">
+            <img class="user-img" *ngIf="userImg" src={{userImg}}>
+            <span class="user-name">{{userName}}</span>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link logout" (click)="logout()">
+              <i class="fa fa-power-off" aria-hidden="true"></i>Logout
+            </a>
+        </li>
+      </ul>
+  </div>
+</nav>

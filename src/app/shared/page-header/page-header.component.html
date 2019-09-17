@@ -1,0 +1,9 @@
+<div [ngClass]="shouldBeLeft ? 'head-left head-container clearfix' : 'head-center head-container clearfix'">
+    <span class="page-head">{{heading}}</span>
+    <div class="back-btn-container">
+        <button class="btn btn-primary print-btn" (click)="printBtnAction()" *ngIf="printBtnObj && printBtnObj.showBtn">Print</button>
+        <button class="btn btn-primary print-btn" (click)="deleteBtnAction()" [disabled]="deleteBtnObj && deleteBtnObj.disable"  *ngIf="deleteBtnObj && deleteBtnObj.showBtn">Delete</button>
+        <button class="btn btn-primary send-btn" (click)="sendMailAction()" [disabled]="sendMailBtnObj && sendMailBtnObj.disable" *ngIf="sendMailBtnObj && sendMailBtnObj.showBtn">Send Mail</button>
+        <button class="btn btn-primary back-btn" (click)="backBtnAction()" *ngIf="backBtn">Back</button>
+    </div>
+</div>

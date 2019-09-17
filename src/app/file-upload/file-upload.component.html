@@ -1,0 +1,151 @@
+<ng-container *ngIf="!fetchDone && !upload">
+  <div class="loading-indicator-wrapper">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </div>
+</ng-container>
+<ng-container *ngIf="fetchDone && !processing">
+  <app-page-header backBtn="backBtn" (backBtnClickEvent)="previousPage()"></app-page-header>
+  <div class="row">
+    <div class="col-sm-3 filter-form">
+      <div class="side-bar-container">
+        <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()"> 
+          <div class="form-group">
+            <select class="form-control" formControlName="emp">
+              <option value="" disabled>Select Employee</option>
+              <option *ngFor="let emp of users" [ngValue]="emp" >
+                {{emp?.fullName}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control" formControlName="yearVal"> 
+              <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control" formControlName="monthVal">
+              <option>All</option>
+              <option *ngFor="let month of months" value="{{month}}">{{month}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary"  [disabled]="!employeeForm.valid">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div (click)="fileInput.click()" salarySlipAppDragDrop (onFileDropped)="uploadFile($event)">
+        <input hidden type="file" accept=".csv" #fileInput (change)="uploadFile($event.target.files)">
+        <div *ngIf="!file && !fileErrorMsg && !fileDropped" [ngClass]="fileDropped?'file-uploaded':'upload-desc'">
+          Click here to upload file <br> OR <br> Drop a file here
+        </div>
+        <div *ngIf="!file && !fileErrorMsg && !fileDropped" class="row">
+          <div class="offset-3 col-sm-6 select-file-help">select a file with .csv extension</div>
+        </div>
+        <div *ngIf="file && !fileErrorMsg && fileDropped" [ngClass]="fileDropped?'file-uploaded':'upload-desc'">
+          {{file.name}}
+        </div>
+        <div *ngIf="fileErrorMsg && fileDropped" class="row">
+          <div class="offset-3 col-sm-6 select-file-error">{{fileErrorMsg}}</div>
+        </div>
+      </div>
+      <ng-container *ngIf="file && !fileErrorMsg && fileDropped">
+        <div class="row upload-btn-container">
+          <div class="offset-3 col-sm-6 upload-btn-data">
+            <button class="btn btn-primary" (click)="uploadFileData()">Upload</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+<app-data-not-found *ngIf="errorMsg">
+  <p>
+    {{errorMsg}}
+  </p>
+  <p>
+    <span class="error-navigate" (click)="reloadPage()">click here</span> to try again! OR
+  </p>
+</app-data-not-found>
+<div class="row head-container" *ngIf="fetchDone && processing && !errorMsg && invalidMail?.length && !list">
+  <div class="col-sm-4 offset-sm-4 page-head">List of Uploaded Salaries</div>
+  <div class="col-sm-4 send-btn-container">
+    <button class="btn btn-primary back-btn" (click)="previousPage()">Back</button>
+  </div>
+</div>
+<app-page-header *ngIf="fetchDone && processing && !errorMsg && list"
+  [heading]="pageHeading"
+  [backBtn]="backBtn" (backBtnClickEvent)="previousPage()"
+  [deleteBtnObj]="deleteBtnObj" (deleteBtnClickEvent)="deleteItem()"
+  [sendMailBtnObj]="sendMailBtnObj" (sendBtnClickEvent)="sendMail()"
+  [shouldBeLeft]="shouldBeLeft">
+</app-page-header>
+<div *ngIf="fetchDone && processing && !errorMsg && invalidMail?.length">
+  <div class="error-head alert alert-danger">
+    <span>Oops! We could not find following Email ID. </span>
+    <span><span (click)="reloadPage()" class="reload-link"> Click here</span> to try again!</span>
+    <div>
+      <ng-container>
+        <span class="invalid-email-text">{{invalidMail}}</span>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="fetchDone && processing && !errorMsg && list">
+  <div class="col-12 table-responsive">
+    <table class="table table-striped emp-list-table">
+      <thead>
+        <tr>
+          <th class="checkbox-container">
+              <input type="checkbox" class="select-item checkbox"
+              [(ngModel)]="allSelected" name="list_name" 
+              value="list" (change)="checkUncheckAll()"/>
+          </th>
+          <th *ngFor="let items of salaryItemsInfo" [class.action-head]="items=='Action'">{{items}}</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="noData">
+        <tr class="text-center">
+          <td colspan="6">
+            No Records!
+            <button class="btn btn-success btn-sm upload-btn" (click)="reloadPage()">Upload</button>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr *ngFor="let emp of list">
+            <td class="checkbox-container">
+              <input type="checkbox" class="select-item checkbox" [(ngModel)]="emp.isSelected"
+                name="select-item" value="{{emp}}" (change)="isAllSelected()" />
+            </td>
+          <td>{{emp?.employeeFullName}}</td> 
+          <td>{{emp?.grossSalary | inrCurrency: true }}</td>          
+          <td>{{emp?.totalDeductions | inrCurrency: true }}</td>
+          <td>{{emp?.netSalaryPayable | inrCurrency: true }}</td>
+          <td class="view-doc">
+            <a class="action" (click)="viewSalarySlip(emp)"><i class="fa fa-eye" title="View Salary Slip"></i></a>
+            <span>/</span>
+            <a class="action" (click)="DeleteRecord(emp)"><i class="fa fa-trash" title="Delete Record"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{modalResponse}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Email will be sent to {{modalContent}}, shortly!</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn print-btn" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+

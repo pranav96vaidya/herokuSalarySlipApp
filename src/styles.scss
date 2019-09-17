@@ -1,0 +1,208 @@
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import './assets/scss/variables';
+
+
+.loading-indicator-wrapper {
+  left: 48%;
+  position: absolute;
+  top: 50%;
+
+  .mat-progress-spinner {
+  
+    circle {
+      stroke: $blackColor;
+    }
+  }
+}
+
+.page-wrapper {
+  margin: 0 auto;
+  width: 80%;
+
+  @media (max-width: $smWidth) {
+    width: 90%;
+  }
+}
+
+.select-file-error {
+  color: $errorColor;
+  font-size: 24px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.navigate-desc {
+  font-size: 16px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.btn-primary:disabled { 
+  cursor: not-allowed;
+}
+
+.filter-form {
+  .side-bar-container {
+    top: 105px;
+  }
+  
+  .btn-primary {
+    background-color: $btnColor;
+    font-size: 14px;
+    width: 100%;
+
+    &:hover:enabled {
+      background-color: $btnColor;
+    }
+
+    &:focus {
+      outline: none ;
+      box-shadow: none ;
+    }
+  }
+
+  .form-control {
+    color: $blackColor;
+    font-size: 14px;
+    height: 30px;
+    padding: 0 5px;
+  }
+}
+
+.emp-list-table {
+  color: $blackColor;
+
+  th {
+    background-color: $tableHeadColor;
+    color: $whiteColor;
+  }
+
+  td, th {
+    font-size: 14px;
+    padding: 6px;
+    @media (max-width: $smWidth) {
+      font-size: 10px;
+    }
+  } 
+
+  .checkbox-container {
+    font-size: 16px;
+    padding: 4px;
+    text-align: center;
+  }
+
+  .action-head {
+    text-align: center;
+  }
+
+  .view-doc {
+    text-align: center;
+
+    .action {
+      color: $btnColor;
+      padding: 10px;
+      @media (max-width: $smWidth) {
+        padding: 2px;
+      }
+
+      .fa {
+        font-size: 16px;
+        @media (max-width: $smWidth) {
+          font-size: 12px;
+        }
+      }
+
+      &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+      }
+    }
+  }
+}
+
+.no-data-found {
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 0px;
+  color: $blackColor;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  width: 50%;
+  @media (max-width: $smWidth) {
+    font-size: 16px;
+    width: 80%;
+  }
+}
+
+.emp-data-container {
+  padding-top: 20px;
+}
+
+.emp-head-container {
+  padding-bottom: 10px;
+  @media (max-width: $smWidth) {
+    font-size: 14px;
+  }
+
+  .emp-head-content {
+    font-weight: $mediumBold;
+    @media (max-width: $smWidth) {
+      font-size: 14px;
+    }
+  }
+}
+
+
+.back-btn,
+.delete-btn,
+.send-btn,
+.print-btn {
+  background-color: $btnColor;
+  color: $whiteColor;
+  font-size: 14px;
+
+  &:hover:enabled {
+    background-color: $btnColor;
+    color: $whiteColor;
+  }
+
+  &:focus {
+    outline: none ;
+    box-shadow: none ;
+  }
+
+  &:disabled {
+    background-color: $btnColor;
+    border-color: $btnColor;
+  }
+}
+
+.close:focus {
+  outline: none ;
+  box-shadow: none ;
+}
+
+.back-btn {
+  @media (max-width: $smWidth) {
+    display: none;
+  }
+}
+
+.delete-btn,
+.send-btn,
+.print-btn {
+  margin-right: 10px;
+  @media (max-width: $smWidth) {
+    font-size: 10px;
+  }
+}
+
+.error-navigate {
+  color: $btnColor;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

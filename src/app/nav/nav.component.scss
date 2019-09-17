@@ -1,0 +1,64 @@
+@import '../../assets/scss/variables';
+
+.navbar {
+    background-color: $navFooterBgColor;
+    border: 1px solid $navFooterBorderColor;
+
+    .navbar-brand {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .navbar-nav {
+
+        .nav-item {
+            margin-right: 20px;
+        }
+
+        .redirect-content {
+            color: $btnColor;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    
+    .user-img {
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    .user-name {
+        color: $blackColor;
+        font-weight: $extraLightBold;
+    }
+
+    .fa-power-off {
+        margin-right: 7px;
+    }
+    
+    .logout:hover {
+        cursor: pointer;
+        color: $blackColor;
+    }
+}
+
+@media (max-width: $smWidth) {
+    .navbar-toggler {
+        font-size: 14px;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:focus {
+            background-color: $btnColor;
+        }
+
+        &:focus .icon-bar {
+            background-color: $whiteColor;
+        }
+    }
+}

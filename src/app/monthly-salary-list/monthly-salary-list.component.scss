@@ -1,0 +1,41 @@
+@import '../../assets/scss/variables';
+
+.head-container {
+    padding: 15px 0;
+
+    .back-btn-container {
+        text-align: right;
+        @media (max-width: $smWidth) {
+            display: none;
+        }
+    }
+}
+
+.page-head {
+    color: $blackColor;
+    font-size: 25px;
+    font-weight: $extraLightBold;
+    text-align: center;
+
+    @media (max-width: $smWidth) {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+}
+
+.form-container {
+    padding-bottom: 15px;
+
+    .year-selector {
+        width: 200px;
+        margin-right: 5px;
+    
+        @media (max-width: $smWidth) {
+            width: 150px;
+        }
+    }
+
+    .btn {
+        padding: 3px 8px;
+    }
+}

@@ -1,0 +1,31 @@
+@import '../../../assets/scss/variables';
+
+.head-container {
+    padding: 15px 0;
+    @media print {
+        display: none;
+    }
+
+    .page-head {
+        color: $blackColor;
+        font-size: 25px;
+        font-weight: $lightBold;
+      
+        @media (max-width: $smWidth) {
+          font-size: 18px;
+          margin-bottom: 15px;
+        }
+    }
+
+    .back-btn-container {
+        float: right;
+    }
+}
+
+.head-left {
+    text-align: left; 
+}
+
+.head-center {
+    text-align: center;
+}

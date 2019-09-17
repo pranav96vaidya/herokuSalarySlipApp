@@ -1,0 +1,12 @@
+@import '../../../assets/scss/variables';
+
+.error-content {
+    padding-top: 80px;
+    text-align: center;
+    color: $errorColor;
+    font-size: 20px;
+
+    @media (max-width: $smWidth) {
+        padding-top: 50px;
+    }
+}

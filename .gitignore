@@ -1,0 +1,6 @@
+/node_modules
+.DS_Store
+**/.DS_Store
+/dist
+/src/assets/company-seal.png
+/src/assets/signature.png
